@@ -18,31 +18,31 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tratta")
 public class Tratta {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "codice")
 	private String codice;
 
 	@Column(name = "descrizione")
 	private String descrizione;
-	
+
 	@Column(name = "data")
 	private LocalDate data;
 
 	@Column(name = "oradecollo")
 	private LocalTime oraDecollo;
-	
+
 	@Column(name = "oraatterraggio")
 	private LocalTime oraAtterraggio;
-	
+
 	@Column(name = "stato")
 	@Enumerated(EnumType.STRING)
 	private Stato stato;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "airbus_id", nullable = false)
 	private Airbus airbus;
@@ -58,6 +58,18 @@ public class Tratta {
 		this.oraAtterraggio = oraAtterraggio;
 		this.stato = stato;
 		this.airbus = airbus;
+	}
+
+	public Tratta(Long id, String codice, String descrizione, LocalDate data, LocalTime oraDecollo,
+			LocalTime oraAtterraggio, Stato stato) {
+		super();
+		this.id = id;
+		this.codice = codice;
+		this.descrizione = descrizione;
+		this.data = data;
+		this.oraDecollo = oraDecollo;
+		this.oraAtterraggio = oraAtterraggio;
+		this.stato = stato;
 	}
 
 	public Long getId() {
@@ -123,7 +135,5 @@ public class Tratta {
 	public void setAirbus(Airbus airbus) {
 		this.airbus = airbus;
 	}
-	
 
-	
 }
