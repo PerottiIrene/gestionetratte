@@ -44,8 +44,11 @@ public class GestionetratteApplication implements CommandLineRunner {
 				LocalDate.parse("29-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")),
 				LocalTime.parse("15:00:00"),
 				LocalTime.parse("22:00:00"), airbusAB);
-
+		
+		if (trattaService.findByCodiceAndDescrizione(argentinaMilano.getCodice(), argentinaMilano.getDescrizione()).isEmpty()) {
 			trattaService.inserisciNuovo(argentinaMilano);
+		}
+
 
 		// creazione airbus2
 		Airbus airbusRS = airbusService.findByCodiceAndDescrizione("56rds2", "Roma-Spagna");
@@ -62,7 +65,9 @@ public class GestionetratteApplication implements CommandLineRunner {
 				LocalTime.parse("11:00:00"),
 				LocalTime.parse("13:00:00"), airbusRS);
 
+		if (trattaService.findByCodiceAndDescrizione(romaSpagna.getCodice(), romaSpagna.getDescrizione()).isEmpty()) {
 			trattaService.inserisciNuovo(romaSpagna);
+		}
 
 	}
 

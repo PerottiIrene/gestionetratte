@@ -9,27 +9,27 @@ import it.prova.gestionetratte.model.Tratta;
 import it.prova.gestionetratte.repository.tratta.TrattaRepository;
 
 @Service
-public class TrattaServiceImpl implements TrattaService{
-	
+public class TrattaServiceImpl implements TrattaService {
+
 	@Autowired
 	private TrattaRepository repository;
 
 	@Override
 	public List<Tratta> listAllElements(boolean eager) {
-		// TODO Auto-generated method stub
-		return null;
+		if (eager)
+			return (List<Tratta>) repository.findAllTrattaEager();
+
+		return (List<Tratta>) repository.findAll();
 	}
 
 	@Override
 	public Tratta caricaSingoloElemento(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
 	public Tratta caricaSingoloElementoEager(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findSingleTrattaEager(id);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class TrattaServiceImpl implements TrattaService{
 	@Override
 	public void rimuovi(Long idToRemove) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -59,7 +59,5 @@ public class TrattaServiceImpl implements TrattaService{
 	public List<Tratta> findByCodiceAndDescrizione(String codice, String descrizione) {
 		return repository.findByCodiceAndDescrizione(codice, descrizione);
 	}
-	
-	
 
 }
