@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.prova.gestionetratte.model.Stato;
 import it.prova.gestionetratte.model.Tratta;
 import it.prova.gestionetratte.repository.tratta.TrattaRepository;
+import it.prova.gestionetratte.web.api.exception.TrattaConStatoNonAnnullatoException;
 
 @Service
 public class TrattaServiceImpl implements TrattaService {
@@ -44,8 +46,13 @@ public class TrattaServiceImpl implements TrattaService {
 
 	@Override
 	public void rimuovi(Long idToRemove) {
-		// TODO Auto-generated method stub
-
+		
+		Tratta tratta=repository.findById(idToRemove).orElse(null);
+		
+		if(tratta.getStato() == Stato.ATTIVA || tratta.getStato() == Stato.CONCLUSA) {
+			throw new TrattaConStatoNonAnnullatoException("la tratta non puo essere rimossa, il suo stato non e' annullato");
+		}
+		repository.deleteById(idToRemove);
 	}
 
 	@Override

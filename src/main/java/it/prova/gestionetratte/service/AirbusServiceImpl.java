@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import it.prova.gestionetratte.model.Airbus;
 import it.prova.gestionetratte.repository.airbus.AirbusRepository;
+import it.prova.gestionetratte.web.api.exception.AirbusConTratteAssociateException;
 
 @Service
 public class AirbusServiceImpl implements AirbusService{
@@ -46,6 +47,12 @@ public class AirbusServiceImpl implements AirbusService{
 
 	@Override
 	public void rimuovi(Long idToRemove) {
+		
+		Airbus airbus=repository.findById(idToRemove).orElse(null);
+		
+		if(airbus.getTratte().size() != 0) {
+			throw new AirbusConTratteAssociateException("questo airbus non puo essere rimosso, e' associato a delle tratte!");
+		}
 		repository.deleteById(idToRemove);
 	}
 

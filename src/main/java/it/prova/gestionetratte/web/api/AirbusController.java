@@ -76,12 +76,6 @@ public class AirbusController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable(required = true) Long id) {
-		Airbus airbus=airbusService.caricaSingoloElemento(id);
-		
-		if(airbus.getTratte().size() != 0) {
-			throw new AirbusConTratteAssociateException("questo airbus non puo essere rimosso, e' associato a delle tratte!");
-		}
-		
 		airbusService.rimuovi(id);
 	}
 	
