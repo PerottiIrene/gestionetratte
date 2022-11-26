@@ -34,7 +34,7 @@ public class GestionetratteApplication implements CommandLineRunner {
 		Airbus airbusAB = airbusService.findByCodiceAndDescrizione("23btr5", "Argentina-Milano");
 
 		if (airbusAB == null) {
-			airbusAB = new Airbus("23btr5", "Argetina-Milano",
+			airbusAB = new Airbus("23btr5", "Argentina-Milano",
 					LocalDate.parse("29-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")), 150);
 			airbusService.inserisciNuovo(airbusAB);
 		}
