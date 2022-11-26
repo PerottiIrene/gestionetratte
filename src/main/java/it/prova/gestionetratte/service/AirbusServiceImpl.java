@@ -46,8 +46,7 @@ public class AirbusServiceImpl implements AirbusService{
 
 	@Override
 	public void rimuovi(Long idToRemove) {
-		// TODO Auto-generated method stub
-		
+		repository.deleteById(idToRemove);
 	}
 
 	@Override
