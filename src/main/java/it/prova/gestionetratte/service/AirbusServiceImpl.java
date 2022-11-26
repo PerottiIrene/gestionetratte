@@ -36,8 +36,7 @@ public class AirbusServiceImpl implements AirbusService{
 
 	@Override
 	public Airbus aggiorna(Airbus airbusInstance) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(airbusInstance);
 	}
 
 	@Override
