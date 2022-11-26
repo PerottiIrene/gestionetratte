@@ -46,6 +46,8 @@ public class Tratta {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "airbus_id", nullable = false)
 	private Airbus airbus;
+	
+	public Tratta() {}
 
 	public Tratta(Long id, String codice, String descrizione, LocalDate data, LocalTime oraDecollo,
 			LocalTime oraAtterraggio, Stato stato, Airbus airbus) {
@@ -70,6 +72,17 @@ public class Tratta {
 		this.oraDecollo = oraDecollo;
 		this.oraAtterraggio = oraAtterraggio;
 		this.stato = stato;
+	}
+	
+	public Tratta(String codice, String descrizione, LocalDate data, LocalTime oraDecollo, LocalTime oraAtterraggio,
+			Airbus airbus) {
+		super();
+		this.codice = codice;
+		this.descrizione = descrizione;
+		this.data = data;
+		this.oraDecollo = oraDecollo;
+		this.oraAtterraggio = oraAtterraggio;
+		this.airbus = airbus;
 	}
 
 	public Long getId() {

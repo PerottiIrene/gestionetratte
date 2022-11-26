@@ -3,6 +3,7 @@ package it.prova.gestionetratte.service;
 import java.util.List;
 
 import it.prova.gestionetratte.model.Airbus;
+import it.prova.gestionetratte.model.Tratta;
 
 public interface AirbusService {
 
@@ -12,7 +13,7 @@ public interface AirbusService {
 
 	Airbus caricaSingoloElemento(Long id);
 
-	Airbus caricaSingoloElementoConFilms(Long id);
+	Airbus caricaSingoloElementoConTratte(Long id);
 
 	Airbus aggiorna(Airbus airbusInstance);
 
@@ -21,5 +22,7 @@ public interface AirbusService {
 	void rimuovi(Long idToRemove);
 
 	List<Airbus> findByExample(Airbus example);
+	
+	Airbus findByCodiceAndDescrizione(String codice, String descrizione);
 
 }

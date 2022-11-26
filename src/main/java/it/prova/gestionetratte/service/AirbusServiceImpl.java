@@ -16,26 +16,22 @@ public class AirbusServiceImpl implements AirbusService{
 
 	@Override
 	public List<Airbus> listAllElements() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Airbus>) repository.findAll();
 	}
 
 	@Override
 	public List<Airbus> listAllElementsEager() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Airbus>) repository.findAllEager();
 	}
 
 	@Override
 	public Airbus caricaSingoloElemento(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
-	public Airbus caricaSingoloElementoConFilms(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Airbus caricaSingoloElementoConTratte(Long id) {
+		return repository.findByIdEager(id);
 	}
 
 	@Override
@@ -46,8 +42,7 @@ public class AirbusServiceImpl implements AirbusService{
 
 	@Override
 	public Airbus inserisciNuovo(Airbus airbusInstance) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(airbusInstance);
 	}
 
 	@Override
@@ -60,6 +55,11 @@ public class AirbusServiceImpl implements AirbusService{
 	public List<Airbus> findByExample(Airbus example) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Airbus findByCodiceAndDescrizione(String codice, String descrizione) {
+		return repository.findByCodiceAndDescrizione(codice, descrizione);
 	}
 
 }
