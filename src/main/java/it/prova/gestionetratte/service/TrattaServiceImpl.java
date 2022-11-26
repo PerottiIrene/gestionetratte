@@ -34,8 +34,7 @@ public class TrattaServiceImpl implements TrattaService {
 
 	@Override
 	public Tratta aggiorna(Tratta trattaInstance) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(trattaInstance);
 	}
 
 	@Override
