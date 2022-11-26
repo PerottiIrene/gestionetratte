@@ -1,5 +1,9 @@
 package it.prova.gestionetratte.service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +67,18 @@ public class TrattaServiceImpl implements TrattaService {
 	@Override
 	public List<Tratta> findByCodiceAndDescrizione(String codice, String descrizione) {
 		return repository.findByCodiceAndDescrizione(codice, descrizione);
+	}
+
+	@Override
+	public void concludiTratte() {
+		
+		List<Tratta> listaTratte= (List<Tratta>) repository.findAll();
+		
+		for(Tratta trattaItem: listaTratte) {
+			if(trattaItem.getStato()== Stato.ATTIVA && LocalTime.now().isAfter(trattaItem.getOraAtterraggio()))
+				trattaItem.setStato(Stato.CONCLUSA);
+			repository.save(trattaItem);
+		}
 	}
 
 }
