@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.prova.gestionetratte.dto.AirbusDTO;
 import it.prova.gestionetratte.dto.TrattaDTO;
 import it.prova.gestionetratte.model.Stato;
 import it.prova.gestionetratte.model.Tratta;
@@ -74,6 +75,12 @@ public class TrattaController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable(required = true) Long id) {			
 		trattaService.rimuovi(id);
+	}
+	
+	@PostMapping("/search")
+	public List<TrattaDTO> search(@RequestBody TrattaDTO example) {
+		return TrattaDTO.createTrattaDTOListFromModelList(trattaService.findByExample(example.buildTrattaModel()),
+				false);
 	}
 
 }
