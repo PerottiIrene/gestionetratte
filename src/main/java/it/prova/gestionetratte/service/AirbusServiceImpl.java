@@ -72,16 +72,16 @@ public class AirbusServiceImpl implements AirbusService {
 
 	@Override
 	public List<AirbusDTO> listaAirbusEvidenziandoSovrapposizioni() {
-		List<AirbusDTO> listaAirbus = AirbusDTO.createAirbusDTOListFromModelList(repository.findAllEager(), true,false);
+		List<AirbusDTO> listaAirbus = AirbusDTO.createAirbusDTOListFromModelList(repository.findAllEager(), true);
 
 		for (AirbusDTO airbusItem : listaAirbus) {
 			for (TrattaDTO trattaItem : airbusItem.getTratte()) {
 				for (TrattaDTO trattaItem2 : airbusItem.getTratte()) {
-					if (trattaItem.getData() == trattaItem2.getData() && ((trattaItem2.getOraDecollo()
-							.isAfter(trattaItem.getOraDecollo())
-							&& trattaItem.getOraDecollo().isBefore(trattaItem2.getOraAtterraggio()))
-							|| (trattaItem2.getOraDecollo().isAfter(trattaItem.getOraAtterraggio())
-									&& trattaItem.getOraAtterraggio().isBefore(trattaItem2.getOraAtterraggio())))) {
+					if (trattaItem.getData() == trattaItem2.getData() 
+							&& (trattaItem2.getOraDecollo().isAfter(trattaItem.getOraDecollo())
+							&& (trattaItem2.getOraDecollo().isBefore(trattaItem.getOraAtterraggio())))
+							|| (trattaItem2.getOraAtterraggio().isAfter(trattaItem.getOraAtterraggio())
+									&& trattaItem.getOraAtterraggio().isBefore(trattaItem2.getOraAtterraggio()))) {
 						airbusItem.setConSovrapposizioni(true);
 					}
 				}
